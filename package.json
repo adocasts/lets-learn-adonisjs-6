@@ -56,6 +56,7 @@
     "@adonisjs/auth": "^9.0.0",
     "@adonisjs/core": "^6.2.0",
     "@adonisjs/lucid": "^19.0.0",
+    "@adonisjs/redis": "^8.0.1",
     "@adonisjs/session": "^7.0.0",
     "@adonisjs/shield": "^8.0.1",
     "@adonisjs/static": "^1.1.1",
