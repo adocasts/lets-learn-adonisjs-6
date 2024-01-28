@@ -1,6 +1,10 @@
 import redis from '@adonisjs/redis/services/main'
 
 class CacheService {
+  async has(...keys: string[]) {
+    return redis.exists(keys)
+  }
+
   async get(key: string) {
     const value = await redis.get(key)
     return value && JSON.parse(value)
@@ -12,6 +16,10 @@ class CacheService {
 
   async delete(...keys: string[]) {
     return redis.del(keys)
+  }
+
+  async flushDb() {
+    return redis.flushdb()
   }
 }
 
