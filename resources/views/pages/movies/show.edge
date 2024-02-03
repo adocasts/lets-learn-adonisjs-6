@@ -9,19 +9,17 @@
 </head>
 <body>
   <div class="max-w-3xl mx-auto mt-6">
-    <nav>
-      <a href="{{ route('home') }}">Home</a>
-      <a href="{{ route('movies.show', { slug: 'my-awesome-movie' }) }}">
-        My Awesome Movie
-      </a>
-      <a href="{{ route('movies.show', { slug: 'another-awesome-movie' }) }}">
-        Another Awesome Movie
-      </a>
-    </nav>
+    @include('partials/nav')
 
     <h1>{{ movie.title }}</h1>
 
-    {{{ movie.abstract }}}
+    @if (movie.abstract)
+      <div class="my-8 bg-slate-100 rounded-xl p-8">
+        {{{ movie.abstract }}}
+      </div>
+    @else
+      No Abstract
+    @endif
   </div>
 </body>
 </html>
