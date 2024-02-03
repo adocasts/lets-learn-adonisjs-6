@@ -1,0 +1,19 @@
+@let(className = 'rounded-lg overflow-hidden border border-slate-200/60 bg-white text-slate-700 shadow-sm')
+
+<div {{ $props.merge({ class: [className] }).except(['movie']).toAttrs() }}>
+  <div class="relative">
+    <img src="https://picsum.photos/450/200?v={{ movie.slug }}" class="w-full h-auto" />
+  </div>
+  <div class="p-7">
+    <h2 class="mb-2 text-lg font-bold leading-none tracking-tight">
+      {{ movie.title }}
+    </h2>
+    <p class="mb-5 text-slate-500">
+      {{ movie.summary }}
+    </p>
+
+    @button({ href: route('movies.show', { slug: movie.slug }) })
+      View Movie
+    @end
+  </div>
+</div>
