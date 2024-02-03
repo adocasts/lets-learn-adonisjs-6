@@ -1,25 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> AdonisJS - A fully featured web framework for Node.js </title>
+@layout({ title: movie.title })
+  @slot('meta')
+    <meta name="description" content="{{ movie.summary }}" />
+  @endslot
 
-  @vite(['resources/js/app.js'])
-</head>
-<body>
-  <div class="max-w-3xl mx-auto mt-6">
-    @include('partials/nav')
+  <h1>{{ movie.title }}</h1>
 
-    <h1>{{ movie.title }}</h1>
-
-    @if (movie.abstract)
-      <div class="my-8 bg-slate-100 rounded-xl p-8">
-        {{{ movie.abstract }}}
-      </div>
-    @else
-      No Abstract
-    @endif
-  </div>
-</body>
-</html>
+  @if (movie.abstract)
+    <div class="my-8 bg-slate-100 rounded-xl p-8">
+      {{{ movie.abstract }}}
+    </div>
+  @else
+    No Abstract
+  @endif
+@end
