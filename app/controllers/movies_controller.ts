@@ -4,8 +4,7 @@ import Movie from '#models/movie'
 export default class MoviesController {
   async index({ view }: HttpContext) {
     const movies = await Movie.all()
-    view.share({ shareExample: 'Share Info' })
-    return view.render('pages/home', { movies, stateExample: 'State Info' })
+    return view.render('pages/home', { movies })
   }
 
   async show({ view, params }: HttpContext) {
