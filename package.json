@@ -62,8 +62,10 @@
     "@adonisjs/static": "^1.1.1",
     "@adonisjs/vite": "^2.0.2",
     "@dimerapp/markdown": "^8.0.1",
+    "@iconify-json/ph": "^1.1.11",
     "@vinejs/vine": "^1.7.0",
     "better-sqlite3": "^9.3.0",
+    "edge-iconify": "^2.0.1",
     "edge.js": "^6.0.1",
     "luxon": "^3.4.4",
     "reflect-metadata": "^0.2.1"

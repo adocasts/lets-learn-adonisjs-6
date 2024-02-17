@@ -18,6 +18,7 @@
       {{ csrfField() }}
       
       @button({ type: 'submit', class: 'rounded-b-none' })
+        @svg('ph:trash-fill', { class: 'mr-2' })
         Flush Redis Db
       @end
     </form>
