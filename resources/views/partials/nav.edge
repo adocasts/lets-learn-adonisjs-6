@@ -1,9 +1,6 @@
-<nav>
+<nav class="flex items-center gap-4">
   <a href="{{ route('home') }}">Home</a>
-  <a href="{{ route('movies.show', { slug: 'my-awesome-movie' }) }}">
-    My Awesome Movie
-  </a>
-  <a href="{{ route('movies.show', { slug: 'another-awesome-movie' }) }}">
-    Another Awesome Movie
+  <a href="{{ route('app.home', {}, { domain: 'app.lvh.me', prefixUrl: 'http://app.lvh.me:3333' }) }}">
+    App Home
   </a>
 </nav>
