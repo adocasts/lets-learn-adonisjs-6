@@ -6,6 +6,8 @@ import { BaseSeeder } from '@adonisjs/lucid/seeders'
 import { DateTime } from 'luxon'
 
 export default class extends BaseSeeder {
+  static environment = ['development']
+
   async run() {
     // Write your database queries inside the run method
     await CineastFactory.createMany(10)
