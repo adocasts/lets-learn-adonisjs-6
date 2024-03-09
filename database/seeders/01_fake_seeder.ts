@@ -22,6 +22,7 @@ export default class extends BaseSeeder {
       const movie = movies[index]
       const released = DateTime.now().set({ year: movie.releaseYear })
 
+      row.statusId = MovieStatuses.RELEASED
       row.title = movie.title
       row.releasedAt = DateTime.fromJSDate(
         faker.date.between({
