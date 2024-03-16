@@ -12,7 +12,7 @@ export default class extends BaseSeeder {
   async run() {
     // Write your database queries inside the run method
     await CineastFactory.createMany(10)
-    await UserFactory.with('profile').createMany(5)
+    await UserFactory.createMany(5)
     await this.#createMovies()
   }
 
@@ -22,7 +22,6 @@ export default class extends BaseSeeder {
       const movie = movies[index]
       const released = DateTime.now().set({ year: movie.releaseYear })
 
-      row.statusId = MovieStatuses.RELEASED
       row.title = movie.title
       row.releasedAt = DateTime.fromJSDate(
         faker.date.between({
