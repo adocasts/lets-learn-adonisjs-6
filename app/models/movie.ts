@@ -71,7 +71,7 @@ export default class Movie extends BaseModel {
     const rows = await Movie.query()
       .select('slug')
       .whereRaw('lower(??) = ?', ['slug', slug])
-      .orWhereRaw('lower(??) like ?', ['slug', `slug-%`])
+      .orWhereRaw('lower(??) like ?', ['slug', `${slug}-%`])
 
     if (!rows.length) {
       movie.slug = slug
