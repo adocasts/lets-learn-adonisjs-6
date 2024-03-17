@@ -1,5 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, computed } from '@adonisjs/lucid/orm'
+import { BaseModel, column, computed, hasMany } from '@adonisjs/lucid/orm'
+import Movie from './movie.js'
+import type { HasMany } from '@adonisjs/lucid/types/relations'
 
 export default class Cineast extends BaseModel {
   @column({ isPrimary: true })
@@ -24,4 +26,14 @@ export default class Cineast extends BaseModel {
   get fullName() {
     return `${this.firstName} ${this.lastName}`
   }
+
+  @hasMany(() => Movie, {
+    foreignKey: 'directorId',
+  })
+  declare moviesDirected: HasMany<typeof Movie>
+
+  @hasMany(() => Movie, {
+    foreignKey: 'writerId',
+  })
+  declare moviesWritten: HasMany<typeof Movie>
 }
