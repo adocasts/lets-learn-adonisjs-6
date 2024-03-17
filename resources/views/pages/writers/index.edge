@@ -1,0 +1,16 @@
+@layout()
+  <h1>Writers</h1>
+
+  <ul>
+    @each (writer in writers)
+      <li>
+        <a href="{{ route('writers.show', { id: writer.id })}}">
+          {{ writer.fullName }}
+          <span class="text-slate-400">
+            ( {{ writer.$extras.releasedCount }} Released, {{ writer.$extras.notReleasedCount }} Not Released )
+          </span>
+        </a>
+      </li>
+    @endeach
+  </ul>
+@end

@@ -1,0 +1,11 @@
+@layout()
+  <h1>Writer {{ writer.fullName }}</h1>
+
+  <div class="flex flex-wrap -mx-6">
+    @each (movie in writer.moviesWritten)
+      <div class="w-full lg:w-1/3 px-3">
+        @!movie.card({ movie, class: 'w-full' })
+      </div>
+    @end
+  </div>
+@end
