@@ -2,12 +2,13 @@ import factory from '@adonisjs/lucid/factories'
 import Movie from '#models/movie'
 import MovieStatuses from '#enums/movie_statuses'
 import { DateTime } from 'luxon'
-import { CineastFactory } from './cineast_factory.js'
 
 export const MovieFactory = factory
   .define(Movie, async ({ faker }) => {
     return {
       statusId: MovieStatuses.WRITING,
+      directorId: 1,
+      writerId: 1,
       title: faker.music.songName(),
       summary: faker.lorem.sentence(),
       abstract: faker.lorem.paragraphs(),
@@ -27,6 +28,4 @@ export const MovieFactory = factory
     row.statusId = MovieStatuses.POST_PRODUCTION
     row.releasedAt = DateTime.fromJSDate(faker.date.soon())
   })
-  .relation('director', () => CineastFactory)
-  .relation('writer', () => CineastFactory)
   .build()

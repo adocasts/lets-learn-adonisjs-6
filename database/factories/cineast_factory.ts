@@ -1,6 +1,5 @@
 import factory from '@adonisjs/lucid/factories'
 import Cineast from '#models/cineast'
-import { MovieFactory } from './movie_factory.js'
 
 export const CineastFactory = factory
   .define(Cineast, async ({ faker }) => {
@@ -10,6 +9,4 @@ export const CineastFactory = factory
       headshotUrl: faker.image.avatar(),
     }
   })
-  .relation('moviesDirected', () => MovieFactory)
-  .relation('moviesWritten', () => MovieFactory)
   .build()
