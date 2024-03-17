@@ -1,0 +1,13 @@
+@layout()
+  <h1>Directors</h1>
+
+  <ul>
+    @each (director in directors)
+      <li>
+        <a href="{{ route('directors.show', { id: director.id })}}">
+          {{ director.fullName }}
+        </a>
+      </li>
+    @endeach
+  </ul>
+@end
