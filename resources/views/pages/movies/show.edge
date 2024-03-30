@@ -31,4 +31,30 @@
   @else
     No Abstract
   @endif
+
+  <div class="flex flex-wrap justify-between">
+    <div class="w-full lg:w-1/2">
+      <h3 class="font-bold text-lg">Cast</h3>
+      <dl>
+        @each (cineast in cast)
+          <div class="flex items-baseline gap-2">
+            <dt>{{ cineast.$extras.pivot_character_name }}</dt>
+            <dd class="text-slate-400 text-sm">{{ cineast.fullName }}</dd>
+          </div>
+        @endeach
+      </dl>
+    </div>
+
+    <div class="w-full lg:w-1/2">
+      <h3 class="font-bold text-lg">Crew</h3>
+      <dl>
+        @each (cineast in crew)
+          <div class="flex items-baseline gap-2">
+            <dt>{{ cineast.fullName }}</dt>
+            <dd class="text-slate-400 text-sm">{{ cineast.$extras.pivot_title }}</dd>
+          </div>
+        @endeach
+      </dl>
+    </div>
+  </div>
 @end

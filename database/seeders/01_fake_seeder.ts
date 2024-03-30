@@ -66,12 +66,12 @@ export default class extends BaseSeeder {
       await MovieFactory.with('director').with('writer').apply('postProduction').createMany(2)
     )
 
-    // const promises = movieRecords.map(async (movie) => {
-    //   await this.#attachRandomCastMembers(movie, cineasts, 4)
-    //   return this.#attachRandomCrewMembers(movie, cineasts, 3)
-    // })
+    const promises = movieRecords.map(async (movie) => {
+      await this.#attachRandomCastMembers(movie, cineasts, 4)
+      return this.#attachRandomCrewMembers(movie, cineasts, 3)
+    })
 
-    // await Promise.all(promises)
+    await Promise.all(promises)
   }
 
   async #attachRandomCrewMembers(movie: Movie, cineasts: Cineast[], number: number) {
