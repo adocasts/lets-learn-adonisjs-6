@@ -1,5 +1,11 @@
-<nav>
-  <a href="{{ route('home') }}">Home</a>
-  <a href="{{ route('directors.index') }}">Directors</a>
-  <a href="{{ route('writers.index') }}">Writers</a>
+<nav class="flex justify-between items-center">
+  <div>
+    <a href="{{ route('home') }}">Home</a>
+    <a href="{{ route('directors.index') }}">Directors</a>
+    <a href="{{ route('writers.index') }}">Writers</a>
+  </div>
+
+  <div>
+    <a href="{{ route('auth.register.show')}}">Register</a>
+  </div>
 </nav>

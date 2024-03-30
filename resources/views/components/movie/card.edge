@@ -1,41 +1,40 @@
-@let(className = 'rounded-lg overflow-hidden border border-slate-200/60 bg-white text-slate-700 shadow-sm mb-3')
+@card({ ...$props.except(['movie']) })
+  @slot('picture')
+    <div class="relative">
+      <img src="{{ movie.posterUrl }}" class="w-full h-auto" />
+    </div>
+  @endslot
 
-<div {{ $props.merge({ class: [className] }).except(['movie']).toAttrs() }}>
-  <div class="relative">
-    <img src="{{ movie.posterUrl }}" class="w-full h-auto" />
-  </div>
-  <div class="p-4">
-    <h3 class="font-bold leading-none tracking-tight">
-      {{ movie.title }}
-    </h3>
-    
-    @if (showWriterDirector)
-      <dl class="text-xs py-4">
-        <div class="flex">
-          <dt class="w-16">Writer:</dt>
-          <dd>
-            <a href="{{ route('writers.show', { id: movie.writer.id }) }}">
-              {{ movie.writer.fullName }}
-            </a>
-          </dd>
-        </div>
-        <div class="flex">
-          <dt class="w-16">Director:</dt>
-          <dd>
-            <a href="{{ route('directors.show', { id: movie.director.id }) }}">
-              {{ movie.director.fullName }}
-            </a>
-          </dd>
-        </div>
-      </dl>
-    @else
-      <p class="text-slate-400 text-xs py-4">
-        {{ movie.summary }}
-      </p>
-    @endif
+  <h3 class="font-bold leading-none tracking-tight">
+    {{ movie.title }}
+  </h3>
+  
+  @if (showWriterDirector)
+    <dl class="text-xs py-4">
+      <div class="flex">
+        <dt class="w-16">Writer:</dt>
+        <dd>
+          <a href="{{ route('writers.show', { id: movie.writer.id }) }}">
+            {{ movie.writer.fullName }}
+          </a>
+        </dd>
+      </div>
+      <div class="flex">
+        <dt class="w-16">Director:</dt>
+        <dd>
+          <a href="{{ route('directors.show', { id: movie.director.id }) }}">
+            {{ movie.director.fullName }}
+          </a>
+        </dd>
+      </div>
+    </dl>
+  @else
+    <p class="text-slate-400 text-xs py-4">
+      {{ movie.summary }}
+    </p>
+  @endif
 
-    @button({ href: route('movies.show', { slug: movie.slug }) })
-      View Movie
-    @end
-  </div>
-</div>
+  @button({ href: route('movies.show', { slug: movie.slug }) })
+    View Movie
+  @end
+@end

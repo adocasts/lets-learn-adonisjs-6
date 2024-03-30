@@ -1,0 +1,32 @@
+@layout()
+  <div class="flex flex-col items-center">
+    <h1>Register</h1>
+
+    @card({ class: 'max-w-md mt-4' })
+
+      <form method="POST" action="{{ route('auth.register.store') }}" class="flex flex-col gap-4">
+        {{ csrfField() }}
+
+        <label class="flex flex-col">
+          <span class="text-xs font-bold">Full Name</span>
+          <input type="text" name="fullName" />
+        </label>
+
+        <label class="flex flex-col">
+          <span class="text-xs font-bold">Email</span>
+          <input type="email" name="email" />
+        </label>
+
+        <label class="flex flex-col">
+          <span class="text-xs font-bold">Password</span>
+          <input type="password" name="password" />
+        </label>
+
+        @button({ type: 'submit' })
+          Register
+        @end
+      </form>
+
+    @end
+  </div>
+@end
