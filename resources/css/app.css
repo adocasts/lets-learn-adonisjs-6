@@ -20,3 +20,11 @@ h1 {
 h2 {
   @apply text-2xl font-bold mb-2 mt-4;
 }
+
+nav {
+  @apply flex gap-2 pb-2 border-b border-slate-100;
+}
+
+nav a {
+  @apply px-2 py-1 rounded hover:bg-slate-100 duration-300;
+}
