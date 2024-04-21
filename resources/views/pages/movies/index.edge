@@ -3,6 +3,21 @@
     <meta name="description" content="Browse and search our awesome movie list" />
   @endslot
 
+  <form method="GET" action="{{ route('movies.index') }}">
+    <div class="flex items-end gap-3 pt-4">
+      @!form.input({
+        label: 'Title Search',
+        name: 'search',
+        type: 'search',
+        value: filters.search
+      })
+
+      @button({ type: 'submit' })
+        Search
+      @end
+    </div>
+  </form>
+
   <h2> All Movies </h2>
   <div class="flex flex-wrap -mx-6">
     @each (movie in movies)
