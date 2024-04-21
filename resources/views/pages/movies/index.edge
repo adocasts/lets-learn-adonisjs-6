@@ -12,6 +12,15 @@
         value: filters.search
       })
 
+      @form.input({ type: 'select', label: 'Status', name: 'status' })
+        <option value="">All</option>
+        @each (status in movieStatuses)
+          <option value="{{ status.id }}" {{ html.attrs({ selected: status.id == filters.status }) }}>
+            {{ status.name }}
+          </option>
+        @endeach
+      @end
+
       @button({ type: 'submit' })
         Search
       @end
@@ -22,7 +31,7 @@
   <div class="flex flex-wrap -mx-6">
     @each (movie in movies)
       <div class="w-full lg:w-1/3 px-3">
-        @!movie.card({ movie, class: 'w-full', showWriterDirector: true })
+        @!movie.card({ movie, class: 'w-full', showWriterDirector: true, showStatus: true })
       </div>
     @end
   </div>

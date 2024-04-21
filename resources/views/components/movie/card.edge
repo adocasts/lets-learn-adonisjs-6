@@ -8,6 +8,17 @@
   <h3 class="font-bold leading-none tracking-tight">
     {{ movie.title }}
   </h3>
+
+  @if (showStatus)
+    <dl class="text-xs py-4">
+      <div class="flex">
+        <dt class="w-16">Status:</dt>
+        <dd>
+          {{ movie.status.name }}
+        </dd>
+      </div>
+    </dl>
+  @endif
   
   @if (showWriterDirector)
     <dl class="text-xs py-4">

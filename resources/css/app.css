@@ -29,6 +29,11 @@ nav a {
   @apply px-2 py-1 rounded hover:bg-slate-100 duration-300;
 }
 
-input:not([type="radio"]):not([type="checkbox"]) {
+input:not([type="radio"]):not([type="checkbox"]),
+select {
   @apply border border-slate-300 rounded px-3 py-1.5 focus:border-indigo-500 duration-300;
+}
+
+select {
+  @apply py-[0.55rem] bg-white;
 }

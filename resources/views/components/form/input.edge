@@ -12,7 +12,13 @@
     </span>
   @endif
 
-  <input type="{{ type || 'text' }}" name="{{ name || '' }}" value="{{ value || '' }}" />
+  @if (type === 'select')
+    <select name="{{ name || '' }}">
+      {{{ await $slots.main() }}}
+    </select>
+  @else
+    <input type="{{ type || 'text' }}" name="{{ name || '' }}" value="{{ value || '' }}" />
+  @endif
   
   @if (name)
     @inputError(name)
