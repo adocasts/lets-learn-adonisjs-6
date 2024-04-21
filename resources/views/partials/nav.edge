@@ -6,7 +6,16 @@
   </div>
 
   <div>
-    <a href="{{ route('auth.login.show') }}">Login</a>
-    <a href="{{ route('auth.register.show')}}">Register</a>
+    @if (auth.user)
+      <form method="POST" action="{{ route('auth.logout') }}">
+        {{ csrfField() }}
+        <button type="submit" class="text-xs">
+          Logout {{ auth.user.fullName }}
+        </button>
+      </form>
+    @else
+      <a href="{{ route('auth.login.show') }}">Login</a>
+      <a href="{{ route('auth.register.show')}}">Register</a>
+    @endif
   </div>
 </nav>

@@ -7,6 +7,12 @@
       <form method="POST" action="{{ route('auth.login.store') }}" class="flex flex-col gap-4">
         {{ csrfField() }}
 
+        @error('E_INVALID_CREDENTIALS')
+          <p role="alert" class="text-red-500 bg-red-50 p-3 rounded text-xs">
+            {{ $message }}
+          </p>
+        @end
+
         @!form.input({
           label: 'Email',
           name: 'email',
@@ -18,6 +24,11 @@
           name: 'password',
           type: 'password'
         })
+
+        <label class="flex items-center gap-2">
+          <input type="checkbox" name="isRememberMe" />
+          <span>Remember Me?</span>
+        </label>
 
         @button({ type: 'submit' })
           Login
