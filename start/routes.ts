@@ -9,6 +9,7 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+const HomeController = () => import('#controllers/home_controller')
 const LogoutController = () => import('#controllers/auth/logout_controller')
 const WritersController = () => import('#controllers/writers_controller')
 const RegisterController = () => import('#controllers/auth/register_controller')
@@ -17,7 +18,9 @@ const DirectorsController = () => import('#controllers/directors_controller')
 const MoviesController = () => import('#controllers/movies_controller')
 const RedisController = () => import('#controllers/redis_controller')
 
-router.get('/', [MoviesController, 'index']).as('home')
+router.get('/', [HomeController, 'index']).as('home')
+
+router.get('/movies', [MoviesController, 'index']).as('movies.index')
 
 router
   .get('/movies/:slug', [MoviesController, 'show'])
