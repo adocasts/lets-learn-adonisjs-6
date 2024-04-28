@@ -19,7 +19,7 @@ export default class MovieService {
     { id: 'writer_desc', text: 'Writer Name (desc)', field: 'cineasts.last_name', dir: 'desc' },
   ]
 
-  static getFiltered(filters: Infer<typeof movieFilterValidator>) {
+  static getFiltered(page: number = 1, filters: Infer<typeof movieFilterValidator>) {
     const sort =
       this.sortOptions.find((option) => option.id === filters.sort) || this.sortOptions[0]
 
@@ -33,6 +33,6 @@ export default class MovieService {
       .preload('writer')
       .preload('status')
       .orderBy(sort.field, sort.dir)
-      .limit(15)
+      .paginate(page, 15)
   }
 }

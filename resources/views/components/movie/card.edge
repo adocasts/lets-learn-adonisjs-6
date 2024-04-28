@@ -5,12 +5,12 @@
     </div>
   @endslot
 
-  <h3 class="font-bold leading-none tracking-tight">
+  <h3 class="font-bold leading-none tracking-tight pb-4">
     {{ movie.title }}
   </h3>
 
   @if (showStatus)
-    <dl class="text-xs py-4">
+    <dl class="text-xs">
       <div class="flex">
         <dt class="w-16">Status:</dt>
         <dd>
@@ -21,7 +21,7 @@
   @endif
   
   @if (showWriterDirector)
-    <dl class="text-xs py-4">
+    <dl class="text-xs">
       <div class="flex">
         <dt class="w-16">Writer:</dt>
         <dd>
@@ -45,7 +45,7 @@
     </p>
   @endif
 
-  @button({ href: route('movies.show', { slug: movie.slug }) })
+  @button({ class: 'mt-4', href: route('movies.show', { slug: movie.slug }) })
     View Movie
   @end
 @end

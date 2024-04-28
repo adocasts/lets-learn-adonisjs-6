@@ -43,4 +43,53 @@
       </div>
     @end
   </div>
+
+  <div class="flex items-center gap-2 pt-3 pb-6">
+    @if (movies.hasPages)
+      <a 
+        href="{{ movies.getUrl(movies.firstPage) }}{{ qs ? `&${qs}` : '' }}" 
+        class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded">
+        <<
+      </a>
+    @endif
+
+    @if (movies.currentPage > movies.firstPage)
+      <a 
+        href="{{ movies.getPreviousPageUrl() }}{{ qs ? `&${qs}` : '' }}" 
+        class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded">
+        <
+      </a>
+    @endif
+
+    @each(item in pagination)
+      <a 
+        {{
+          html.attrs({
+            href: item.url,
+            class: [
+              'w-8 h-8 flex items-center justify-center border border-slate-200 rounded',
+              { 'bg-slate-100 border-indigo-500': item.isActive }
+            ]
+          })
+        }}>
+        {{ item.page }}
+      </a>
+    @endeach
+
+    @if (movies.currentPage < movies.lastPage)
+      <a 
+        href="{{ movies.getNextPageUrl() }}{{ qs ? `&${qs}` : '' }}" 
+        class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded">
+        >
+      </a>
+    @endif
+
+    @if (movies.hasPages)
+      <a 
+        href="{{ movies.getUrl(movies.lastPage) }}{{ qs ? `&${qs}` : '' }}" 
+        class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded">
+        >>
+      </a>
+    @endif
+  </div>
 @end
