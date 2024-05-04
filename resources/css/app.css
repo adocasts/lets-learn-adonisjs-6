@@ -25,7 +25,8 @@ nav {
   @apply flex gap-2 pb-2 border-b border-slate-100;
 }
 
-nav a {
+nav a,
+nav button {
   @apply px-2 py-1 rounded hover:bg-slate-100 duration-300;
 }
 

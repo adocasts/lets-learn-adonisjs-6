@@ -8,12 +8,18 @@
 
   <div>
     @if (auth.user)
-      <form method="POST" action="{{ route('auth.logout') }}">
-        {{ csrfField() }}
-        <button type="submit" class="text-xs">
-          Logout {{ auth.user.fullName }}
-        </button>
-      </form>
+      <div class="flex items-center gap-3">
+        <a href="{{ route('watchlists.index') }}" class="text-xs">
+          Watchlist
+        </a>
+
+        <form method="POST" action="{{ route('auth.logout') }}">
+          {{ csrfField() }}
+          <button type="submit" class="text-xs">
+            Logout {{ auth.user.fullName }}
+          </button>
+        </form>
+      </div>
     @else
       <a href="{{ route('auth.login.show') }}">Login</a>
       <a href="{{ route('auth.register.show')}}">Register</a>

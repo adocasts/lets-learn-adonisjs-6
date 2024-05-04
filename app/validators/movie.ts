@@ -3,7 +3,7 @@ import vine from '@vinejs/vine'
 
 export const movieFilterValidator = vine.compile(
   vine.object({
-    search: vine.string().alphaNumeric().optional(),
+    search: vine.string().optional(),
     status: vine
       .number()
       .exists(async (db, value) => {

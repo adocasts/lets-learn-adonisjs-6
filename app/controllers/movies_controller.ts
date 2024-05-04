@@ -8,9 +8,9 @@ import querystring from 'node:querystring'
 
 export default class MoviesController {
   async index({ request, view, auth }: HttpContext) {
-    const page = request.input('page')
+    const page = request.input('page', 1)
     const filters = await movieFilterValidator.validate(request.qs())
-    const movies = await MovieService.getFiltered(page, filters, auth.user)
+    const movies = await MovieService.getFiltered(filters, auth.user).paginate(page, 15)
     const movieStatuses = await MovieStatus.query().orderBy('name').select('id', 'name')
     const movieSortOptions = MovieService.sortOptions
     const qs = querystring.stringify(filters)
