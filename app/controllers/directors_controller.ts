@@ -13,9 +13,15 @@ export default class DirectorsController {
     return view.render('pages/directors/index', { directors })
   }
 
-  async show({ view, params }: HttpContext) {
+  async show({ view, params, auth }: HttpContext) {
     const director = await Cineast.findOrFail(params.id)
-    const movies = await director.related('moviesDirected').query().orderBy('title')
+    const movies = await director
+      .related('moviesDirected')
+      .query()
+      .if(auth.user, (query) =>
+        query.preload('watchlist', (watchlist) => watchlist.where('userId', auth.user!.id))
+      )
+      .orderBy('title')
     return view.render('pages/directors/show', { director, movies })
   }
 }

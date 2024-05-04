@@ -7,10 +7,10 @@ import router from '@adonisjs/core/services/router'
 import querystring from 'node:querystring'
 
 export default class MoviesController {
-  async index({ request, view }: HttpContext) {
+  async index({ request, view, auth }: HttpContext) {
     const page = request.input('page')
     const filters = await movieFilterValidator.validate(request.qs())
-    const movies = await MovieService.getFiltered(page, filters)
+    const movies = await MovieService.getFiltered(page, filters, auth.user)
     const movieStatuses = await MovieStatus.query().orderBy('name').select('id', 'name')
     const movieSortOptions = MovieService.sortOptions
     const qs = querystring.stringify(filters)

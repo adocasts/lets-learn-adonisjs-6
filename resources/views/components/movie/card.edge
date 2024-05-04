@@ -45,7 +45,19 @@
     </p>
   @endif
 
-  @button({ class: 'mt-4', href: route('movies.show', { slug: movie.slug }) })
-    View Movie
-  @end
+  <div class="mt-4 flex flex-col gap-2">
+    @if (auth.user && movie.watchlist)
+      <form method="POST" action="{{ route('watchlists.toggle', { movieId: movie.id }) }}">
+        {{ csrfField() }}
+      
+        @button({ type: 'submit' })
+          {{ movie.watchlist.length ? 'In Your Watchlist' : 'Add To Watchlist' }}
+        @end
+      </form>
+    @endif
+
+    @button({ href: route('movies.show', { slug: movie.slug }) })
+      View Movie
+    @end
+  </div>
 @end

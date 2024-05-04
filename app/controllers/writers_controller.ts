@@ -19,10 +19,14 @@ export default class WritersController {
     return view.render('pages/writers/index', { writers })
   }
 
-  async show({ view, params }: HttpContext) {
+  async show({ view, params, auth }: HttpContext) {
     const writer = await Cineast.query()
       .where({ id: params.id })
-      .preload('moviesWritten')
+      .preload('moviesWritten', (written) =>
+        written.if(auth.user, (query) =>
+          query.preload('watchlist', (watchlist) => watchlist.where('userId', auth.user!.id))
+        )
+      )
       .firstOrFail()
 
     return view.render('pages/writers/show', { writer })
