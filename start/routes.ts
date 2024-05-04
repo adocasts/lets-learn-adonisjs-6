@@ -28,8 +28,16 @@ router
   .as('movies.show')
   .where('slug', router.matchers.slug())
 
-router.get('/watchlist', [WatchlistsController, 'index']).as('watchlists.index')
-router.post('/watchlists/:movieId/toggle', [WatchlistsController, 'toggle']).as('watchlists.toggle')
+router
+  .group(() => {
+    router.get('/watchlist', [WatchlistsController, 'index']).as('index')
+    router.post('/watchlists/:movieId/toggle', [WatchlistsController, 'toggle']).as('toggle')
+    router
+      .post('/watchlists/:movieId/toggle-watched', [WatchlistsController, 'toggleWatched'])
+      .as('toggle.watched')
+  })
+  .as('watchlists')
+  .use(middleware.auth())
 
 router.get('/directors', [DirectorsController, 'index']).as('directors.index')
 router.get('/directors/:id', [DirectorsController, 'show']).as('directors.show')

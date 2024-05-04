@@ -46,7 +46,9 @@
   @endif
 
   <div class="mt-4 flex flex-col gap-2">
-    @if (auth.user && movie.watchlist)
+    @if ($slots.action)
+      {{{ await $slots.action() }}}
+    @elseif (auth.user && movie.watchlist)
       <form method="POST" action="{{ route('watchlists.toggle', { movieId: movie.id }) }}">
         {{ csrfField() }}
       

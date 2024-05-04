@@ -4,6 +4,7 @@ import MovieService from '#services/movie_service'
 import { movieFilterValidator } from '#validators/movie'
 import type { HttpContext } from '@adonisjs/core/http'
 import router from '@adonisjs/core/services/router'
+import { DateTime } from 'luxon'
 import querystring from 'node:querystring'
 
 export default class WatchlistsController {
@@ -56,5 +57,19 @@ export default class WatchlistsController {
     return response.redirect().back()
   }
 
-  async toggleWatched({}: HttpContext) {}
+  async toggleWatched({ response, params, auth }: HttpContext) {
+    const { movieId } = params
+    const userId = auth.user!.id
+    const watchlist = await Watchlist.query().where({ movieId, userId }).firstOrFail()
+
+    if (watchlist.watchedAt) {
+      watchlist.watchedAt = null
+    } else {
+      watchlist.watchedAt = DateTime.now()
+    }
+
+    await watchlist.save()
+
+    return response.redirect().back()
+  }
 }
