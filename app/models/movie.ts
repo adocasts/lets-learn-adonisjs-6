@@ -1,10 +1,19 @@
 import MovieStatuses from '#enums/movie_statuses'
-import { BaseModel, beforeCreate, belongsTo, column, manyToMany, scope } from '@adonisjs/lucid/orm'
+import {
+  BaseModel,
+  beforeCreate,
+  belongsTo,
+  column,
+  hasMany,
+  manyToMany,
+  scope,
+} from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 import string from '@adonisjs/core/helpers/string'
 import MovieStatus from './movie_status.js'
-import type { BelongsTo, ManyToMany } from '@adonisjs/lucid/types/relations'
+import type { BelongsTo, HasMany, ManyToMany } from '@adonisjs/lucid/types/relations'
 import Cineast from './cineast.js'
+import Watchlist from './watchlist.js'
 
 export default class Movie extends BaseModel {
   @column({ isPrimary: true })
@@ -57,6 +66,9 @@ export default class Movie extends BaseModel {
     foreignKey: 'writerId',
   })
   declare writer: BelongsTo<typeof Cineast>
+
+  @hasMany(() => Watchlist)
+  declare watchlist: HasMany<typeof Watchlist>
 
   @manyToMany(() => Cineast, {
     pivotTable: 'crew_movies',
