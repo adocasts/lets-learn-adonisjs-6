@@ -7,6 +7,12 @@
       <form method="POST" action="{{ route('profiles.update', {}, { qs: { _method: 'PUT' } })}}" class="flex flex-col gap-4">
         {{ csrfField() }}
 
+        @error('form')
+          <p role="alert" class="text-red-500 bg-red-50 p-3 rounded text-xs">
+            {{ $message }}
+          </p>
+        @end
+
         @!form.input({
           label: 'Full Name',
           name: 'fullName',
