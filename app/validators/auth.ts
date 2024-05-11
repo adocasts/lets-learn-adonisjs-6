@@ -1,8 +1,10 @@
 import vine from '@vinejs/vine'
 
+export const fullNameRule = vine.string().maxLength(100).optional()
+
 export const registerValidator = vine.compile(
   vine.object({
-    fullName: vine.string().maxLength(100).optional(),
+    fullName: fullNameRule,
     email: vine.string().email().normalizeEmail().isUnique({ table: 'users', column: 'email' }),
     password: vine.string().minLength(8),
   })

@@ -1,0 +1,30 @@
+@layout()
+  <div class="flex flex-col items-center">
+    <h1>Edit Your Profile</h1>
+
+    @card({ class: 'max-w-md mt-4' })
+
+      <form method="POST" action="{{ route('profiles.update', {}, { qs: { _method: 'PUT' } })}}" class="flex flex-col gap-4">
+        {{ csrfField() }}
+
+        @!form.input({
+          label: 'Full Name',
+          name: 'fullName',
+          value: auth.user.fullName
+        })
+
+        @!form.input({
+          label: 'Biography',
+          name: 'description',
+          type: 'textarea',
+          value: profile.description
+        })
+
+        @button({ type: 'submit' })
+          Update Profile
+        @end
+      </form>
+
+    @end
+  </div>
+@end
