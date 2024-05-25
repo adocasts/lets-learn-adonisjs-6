@@ -1,0 +1,61 @@
+@card({ ...$props.except(['movie']) })
+  @slot('picture')
+    <div class="relative">
+      <img src="{{ movie.posterUrl }}" class="w-full h-auto" />
+    </div>
+  @endslot
+
+  <h3 class="font-bold leading-none tracking-tight pb-4">
+    {{ movie.title }}
+  </h3>
+
+  @if (showStatus)
+    <dl class="text-xs">
+      <div class="flex">
+        <dt class="w-16">Status:</dt>
+        <dd>
+          {{ movie.status.name }}
+        </dd>
+      </div>
+    </dl>
+  @endif
+  
+  @if (showWriterDirector)
+    <dl class="text-xs">
+      <div class="flex">
+        <dt class="w-16">Writer:</dt>
+        <dd>
+          <a href="{{ route('writers.show', { id: movie.writer.id }) }}">
+            {{ movie.writer.fullName }}
+          </a>
+        </dd>
+      </div>
+      <div class="flex">
+        <dt class="w-16">Director:</dt>
+        <dd>
+          <a href="{{ route('directors.show', { id: movie.director.id }) }}">
+            {{ movie.director.fullName }}
+          </a>
+        </dd>
+      </div>
+    </dl>
+  @else
+    <p class="text-slate-400 text-xs py-4">
+      {{ movie.summary }}
+    </p>
+  @endif
+
+  <p class="text-slate-400 text-xs py-4">
+    Watched At: {{ movie.watchlist.at(0).watchedAt.toFormat('MMM dd, yyyy HH:mm') }}
+  </p>
+
+  <div class="mt-4 flex flex-col gap-2">
+    @if ($slots.action)
+      {{{ await $slots.action() }}}
+    @endif
+
+    @button({ href: route('movies.show', { slug: movie.slug }) })
+      View Movie
+    @end
+  </div>
+@end
