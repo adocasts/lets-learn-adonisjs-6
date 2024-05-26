@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> {{ title || "Let's Learn AdonisJS 6" }} </title>
+
+  @if ($slots.meta)
+    {{{ await $slots.meta() }}}
+  @endif
+
+  @vite(['resources/js/app.js', 'resources/css/app.css'])
+</head>
+<body>
+  <div class="max-w-3xl mx-auto mt-6">
+    @include('partials/nav')
+
+    <div class="flex items-center gap-4 text-xs py-3 border-y border-slate-300">
+      <a href="{{ route('admin.dashboard') }}">
+        Dashboard
+      </a>
+    </div>
+
+    {{{ await $slots.main() }}}
+  </div>
+</body>

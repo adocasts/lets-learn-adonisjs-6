@@ -17,6 +17,12 @@
           Edit Profile
         </a>
 
+        @if (auth.user.roleId === Roles.ADMIN)
+          <a href="{{ route('admin.dashboard') }}" class="text-xs">
+            Admin
+          </a>
+        @endif
+
         <form method="POST" action="{{ route('auth.logout') }}">
           {{ csrfField() }}
           <button type="submit" class="text-xs">
