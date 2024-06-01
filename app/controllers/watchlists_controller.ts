@@ -24,18 +24,11 @@ export default class WatchlistsController {
     movies.baseUrl(router.makeUrl('watchlists.index'))
     movies.queryString(filters)
 
-    const rangeMin = movies.currentPage - 3
-    const rangeMax = movies.currentPage + 3
-    let pagination = movies.getUrlsForRange(1, movies.lastPage).filter((item) => {
-      return item.page >= rangeMin && item.page <= rangeMax
-    })
-
     return view.render('pages/watchlist', {
       movies,
       movieStatuses,
       movieSortOptions,
       filters,
-      pagination,
     })
   }
 

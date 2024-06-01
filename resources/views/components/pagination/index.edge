@@ -1,0 +1,54 @@
+@let(rangeMin = paginator.currentPage - 3)
+@let(rangeMax = paginator.currentPage + 3)
+@let(pagination = paginator.getUrlsForRange(1, paginator.lastPage).filter((item) => {
+  return item.page >= rangeMin && item.page <= rangeMax
+}))
+
+<div class="flex items-center gap-2 pt-3 pb-6">
+  @if (paginator.hasPages)
+    <a 
+      href="{{ paginator.getUrl(paginator.firstPage) }}" 
+      class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded">
+      <<
+    </a>
+  @endif
+
+  @if (paginator.currentPage > paginator.firstPage)
+    <a 
+      href="{{ paginator.getPreviousPageUrl() }}" 
+      class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded">
+      <
+    </a>
+  @endif
+
+  @each(item in pagination)
+    <a 
+      {{
+        html.attrs({
+          href: item.url,
+          class: [
+            'w-8 h-8 flex items-center justify-center border border-slate-200 rounded',
+            { 'bg-slate-100 border-indigo-500': item.isActive }
+          ]
+        })
+      }}>
+      {{ item.page }}
+    </a>
+  @endeach
+
+  @if (paginator.currentPage < paginator.lastPage)
+    <a 
+      href="{{ paginator.getNextPageUrl() }}" 
+      class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded">
+      >
+    </a>
+  @endif
+
+  @if (paginator.hasPages)
+    <a 
+      href="{{ paginator.getUrl(paginator.lastPage) }}" 
+      class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded">
+      >>
+    </a>
+  @endif
+</div>

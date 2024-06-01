@@ -16,18 +16,11 @@ export default class MoviesController {
     movies.baseUrl(router.makeUrl('movies.index'))
     movies.queryString(filters)
 
-    const rangeMin = movies.currentPage - 3
-    const rangeMax = movies.currentPage + 3
-    let pagination = movies.getUrlsForRange(1, movies.lastPage).filter((item) => {
-      return item.page >= rangeMin && item.page <= rangeMax
-    })
-
     return view.render('pages/movies/index', {
       movies,
       movieStatuses,
       movieSortOptions,
       filters,
-      pagination,
     })
   }
 
