@@ -1,0 +1,39 @@
+@layout.admin()
+  <h1>Create A New Movie</h1>
+
+  {{ inspect(flashMessages.all()) }}
+
+  <form method="POST" action="{{ route('admin.movies.store') }}" class="flex flex-col gap-4">
+    {{ csrfField() }}
+
+    @!form.input({ label: 'Title', name: 'title' })
+
+    @!form.input({ type: 'date', label: 'Release Date', name: 'releasedAt' })
+
+    @form.input({ type: 'select', label: 'Status', name: 'statusId' })
+      @each(status in statuses)
+        <option value="{{ status.id }}">{{ status.name }}</option>
+      @endeach
+    @end
+
+    @form.input({ type: 'select', label: 'Writer', name: 'writerId' })
+      @each(cineast in cineasts)
+        <option value="{{ cineast.id }}">{{ cineast.fullName }}</option>
+      @endeach
+    @end
+
+    @form.input({ type: 'select', label: 'Director', name: 'directorId' })
+      @each(cineast in cineasts)
+        <option value="{{ cineast.id }}">{{ cineast.fullName }}</option>
+      @endeach
+    @end
+
+    @!form.input({ type: 'textarea', label: 'Summary', name: 'summary' })
+
+    @!form.input({ type: 'textarea', label: 'Abstract', name: 'abstract' })
+
+    @button({ type: 'submit' })
+      Create Movie
+    @end
+  </form>
+@end

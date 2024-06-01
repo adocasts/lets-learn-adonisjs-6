@@ -1,5 +1,13 @@
 @layout.admin()
-  <h1>Movies</h1>
+  <div class="flex justify-between items-center gap-4">
+    <h1>Movies</h1>
+
+    <div>
+      @button({ href: route('admin.movies.create') })
+        Create Movie
+      @end
+    </div>
+  </div>
 
   <div class="relative overflow-x-auto text-xs">
     <table class="w-full text-sm text-left rtl:text-right text-slate-500">
