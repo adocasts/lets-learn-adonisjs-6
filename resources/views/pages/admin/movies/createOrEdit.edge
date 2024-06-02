@@ -1,0 +1,56 @@
+@let(title = movie ? `Update ${movie.title}` : 'Create A New Movie')
+@let(action = route('admin.movies.store'))
+
+@if (movie)
+  @assign(action = route('admin.movies.update', { id: movie.id }, { qs: { _method: 'PUT' } }))
+@endif
+
+@layout.admin()
+
+  <h1>{{ title }}</h1>
+
+  <form method="POST" action="{{ action }}" class="flex flex-col gap-4">
+    {{ csrfField() }}
+
+    @!form.input({ label: 'Title', name: 'title', value: movie?.title })
+
+    @!form.input({ 
+      type: 'date', 
+      label: 'Release Date', 
+      name: 'releasedAt', 
+      value: movie?.releasedAt.toFormat('yyyy-MM-dd') 
+    })
+
+    @form.input({ type: 'select', label: 'Status', name: 'statusId' })
+      @each(status in statuses)
+        <option value="{{ status.id }}" {{ html.attrs({ selected: movie?.statusId === status.id }) }}>
+          {{ status.name }}
+        </option>
+      @endeach
+    @end
+
+    @form.input({ type: 'select', label: 'Writer', name: 'writerId' })
+      @each(cineast in cineasts)
+        <option value="{{ cineast.id }}" {{ html.attrs({ selected: movie?.writerId === cineast.id }) }}>
+          {{ cineast.fullName }}
+        </option>
+      @endeach
+    @end
+
+    @form.input({ type: 'select', label: 'Director', name: 'directorId' })
+      @each(cineast in cineasts)
+        <option value="{{ cineast.id }}" {{ html.attrs({ selected: movie?.directorId === cineast.id }) }}>
+          {{ cineast.fullName }}
+        </option>
+      @endeach
+    @end
+
+    @!form.input({ type: 'textarea', label: 'Summary', name: 'summary', value: movie?.summary })
+
+    @!form.input({ type: 'textarea', label: 'Abstract', name: 'abstract', value: movie?.abstract })
+
+    @button({ type: 'submit' })
+      {{ movie ? 'Update' : 'Create' }} Movie
+    @end
+  </form>
+@end
