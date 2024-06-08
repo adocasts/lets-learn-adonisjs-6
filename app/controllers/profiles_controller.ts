@@ -44,7 +44,7 @@ export default class ProfilesController {
 
       if (avatar) {
         await avatar.move(app.makePath('storage/avatars'))
-        auth.user!.avatarUrl = `/avatars/${avatar.fileName}`
+        auth.user!.avatarUrl = `/storage/avatars/${avatar.fileName}`
       } else if (!avatarUrl && auth.user?.avatarUrl) {
         await unlink(app.makePath('storage', auth.user.avatarUrl))
         auth.user!.avatarUrl = null

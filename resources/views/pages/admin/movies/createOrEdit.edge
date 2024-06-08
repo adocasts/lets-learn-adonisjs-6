@@ -9,8 +9,28 @@
 
   <h1>{{ title }}</h1>
 
-  <form method="POST" action="{{ action }}" class="flex flex-col gap-4">
+  <form id="movieForm" enctype="multipart/form-data" method="POST" action="{{ action }}" class="flex flex-col gap-4">
     {{ csrfField() }}
+
+    @if (movie?.posterUrl)
+      <div class="relative w-1/3 mx-auto">
+        <img src="{{ movie?.posterUrl }}" class="w-full" />
+        <button 
+          type="button" 
+          class="absolute top-0 right-0 p-3 rounded-full"
+          onclick="(document.forms.movieForm.posterUrl.value = '') || this.parentElement.remove()">
+          &times;
+        </button>
+      </div>
+    @endif
+      
+    <input type="hidden" name="posterUrl" value="{{ movie?.posterUrl || '' }}" />
+
+    @!form.input({
+      type: 'file',
+      label: 'Poster',
+      name: 'poster'
+    })
 
     @!form.input({ label: 'Title', name: 'title', value: movie?.title })
 

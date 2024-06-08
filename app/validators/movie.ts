@@ -3,6 +3,8 @@ import { DateTime } from 'luxon'
 
 export const movieValidator = vine.compile(
   vine.object({
+    poster: vine.file({ extnames: ['png', 'jpg', 'jpeg', 'gif'], size: '5mb' }).optional(),
+    posterUrl: vine.string().optional(),
     title: vine.string().maxLength(100),
     summary: vine
       .string()

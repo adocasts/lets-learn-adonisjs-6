@@ -2,7 +2,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import Movie from '#models/movie'
 import MovieStatus from '#models/movie_status'
 import MovieService from '#services/movie_service'
-import { movieFilterValidator } from '#validators/movie'
+import { movieFilterValidator } from '#validators/movie_filter'
 import router from '@adonisjs/core/services/router'
 
 export default class MoviesController {
