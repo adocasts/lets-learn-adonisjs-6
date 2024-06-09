@@ -9,6 +9,8 @@
 
   <h1>{{ title }}</h1>
 
+  {{ inspect(flashMessages.all()) }}
+
   <form id="movieForm" enctype="multipart/form-data" method="POST" action="{{ action }}" class="flex flex-col gap-4">
     {{ csrfField() }}
 
@@ -69,8 +71,41 @@
 
     @!form.input({ type: 'textarea', label: 'Abstract', name: 'abstract', value: movie?.abstract })
 
+    <h4 class="font-bold">Crew Members</h4>
+
+    <div x-data="{ members: {{ js.stringify(crewMembers) }} }">
+      <div class="flex flex-col gap-3">
+        <template x-for="(member, index) in members" :key="member.id">
+          <div class="flex gap-3">
+            <label class="flex flex-col">
+              <span class="text-xs font-bold">Crew Member</span>
+            
+              <select :name="`crew[${index}][id]`" x-model="members[index].cineast_id">
+                @each(cineast in cineasts)
+                  <option value="{{ cineast.id }}">
+                    {{ cineast.fullName }}
+                  </option>
+                @endeach
+              </select>
+            </label>
+
+            <label class="flex flex-col">
+              <span class="text-xs font-bold">Title</span>
+              <input type="text" :name="`crew[${index}][title]`" x-model="members[index].title" />
+            </label>
+
+            <button type="button" @click="members = members.filter(item => item.id !== member.id)">&times;</button>
+          </div>
+        </template>
+      </div>
+
+      <button type="button" @click="members.push({ id: {{ cineasts[0].id }}, title: '' })">Add Crew Member</button>
+    </div>
+
     @button({ type: 'submit' })
       {{ movie ? 'Update' : 'Create' }} Movie
     @end
   </form>
+
+  <script src="//unpkg.com/alpinejs" defer></script>
 @end
