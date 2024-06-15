@@ -30,5 +30,13 @@ export const movieValidator = vine.compile(
         })
       )
       .optional(),
+    cast: vine
+      .array(
+        vine.object({
+          id: vine.number().isExists({ table: 'cineasts', column: 'id' }),
+          character_name: vine.string(),
+        })
+      )
+      .optional(),
   })
 )

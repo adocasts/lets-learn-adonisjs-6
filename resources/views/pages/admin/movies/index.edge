@@ -35,6 +35,14 @@
             </td>
             <td class="px-2 py-4">
               <a href="{{ route('admin.movies.edit', { id: movie.id }) }}">Edit</a>
+              <form 
+                method="POST" 
+                action="{{ route('admin.movies.destroy', { id: movie.id }, { qs: { _method: 'DELETE' }}) }}">
+                {{ csrfField() }}
+                <button type="submit" class="text-red-500">
+                  Delete
+                </button>
+              </form>
             </td>
           </tr>
         @endeach
