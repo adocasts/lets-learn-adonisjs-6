@@ -92,7 +92,7 @@ export default class MoviesController {
     if (poster) {
       data.posterUrl = await MovieService.storePoster(poster)
     } else if (!data.posterUrl && movie.posterUrl) {
-      await unlink(app.makePath('storage', movie.posterUrl))
+      await unlink(app.makePath('.', movie.posterUrl))
       data.posterUrl = ''
     }
 
